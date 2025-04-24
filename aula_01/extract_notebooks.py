@@ -27,8 +27,15 @@ for i in range(0,10):
                 marca = result.find("span", class_="poly-component__brand")
             link_tag = result.find("a", class_="poly-component__title")
             link = link_tag.get('href')
-            preco = result.find("span", class_="andes-money-amount andes-money-amount--cents-superscript").text
-            data.append({'Title': title, 'Marca': marca, 'Link': link, "Preco": preco})
+            preco_antigo = result.find('span', class_='andes-money-amount__fraction').text
+            preco_atual = result.find("span", class_="andes-money-amount andes-money-amount--cents-superscript").text
+            desconto = result.find('span', class_= 'andes-money-amount__discount')
+            if desconto is not None:
+                desconto = result.find('span', class_= 'andes-money-amount__discount').text
+            else:
+                desconto = result.find('span', class_= 'andes-money-amount__discount')
+
+            data.append({'Title': title, 'Marca': marca, 'Link': link, 'Preco_antigo': preco_antigo, "Preco_Atual": preco_atual, 'Desconto': desconto})
         
         contador += 48
 
